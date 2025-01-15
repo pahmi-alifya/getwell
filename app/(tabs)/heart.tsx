@@ -3,10 +3,10 @@ import { StyleSheet } from "react-native"
 import EditScreenInfo from "@/components/EditScreenInfo"
 import { Text, View } from "@/components/Themed"
 
-export default function TabOneScreen() {
+export default function TabHeartScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
+      <Text style={styles.title}>Heart</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
