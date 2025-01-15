@@ -1,36 +1,36 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import React from "react"
+import { Link, Tabs } from "expo-router"
+import { Image, Pressable, StyleSheet, View } from "react-native"
 
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+import Colors from "@/constants/Colors"
+import { useColorScheme } from "@/components/useColorScheme"
+import { useClientOnlyValue } from "@/components/useClientOnlyValue"
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons"
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
+        tabBarActiveTintColor: "#25B2A6",
+        tabBarInactiveTintColor: "#A2ABAC",
         headerShown: useClientOnlyValue(false, true),
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color, focused }) => (
+            <View style={focused ? styles.bgIcon : ""}>
+              <MaterialCommunityIcons
+                name="home-variant"
+                size={28}
+                color={color}
+              />
+            </View>
+          ),
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -38,7 +38,7 @@ export default function TabLayout() {
                   <FontAwesome
                     name="info-circle"
                     size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
+                    color={Colors[colorScheme ?? "light"].text}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}
@@ -48,12 +48,51 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="heart"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "",
+          headerShown: false,
+          tabBarIcon: () => (
+            <Image
+              source={require("@/assets/images/nav.png")}
+              style={{ height: 50, width: 50, marginTop: 10 }}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="phr"
+        options={{
+          title: "PHR",
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <View style={focused ? styles.bgIcon : ""}>
+              <MaterialCommunityIcons
+                name="heart-pulse"
+                size={28}
+                color={color}
+              />
+            </View>
+          ),
         }}
       />
     </Tabs>
-  );
+  )
 }
+
+const styles = StyleSheet.create({
+  bgIcon: {
+    height: 51,
+    width: 51,
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 1,
+    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 30,
+  },
+})
