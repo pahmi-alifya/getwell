@@ -3,41 +3,6 @@ import React from "react"
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native"
 import { AnimatedCircularProgress } from "react-native-circular-progress"
 
-const BodySystem = () => {
-  const navigation = useNavigation<any>()
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.title}>12 Body Systems Terbaru</Text>
-          <Text style={styles.subTitle}>16 September 2023</Text>
-        </View>
-        <TouchableOpacity onPress={() => navigation.navigate("body-system")}>
-          <Text style={styles.link}>Lihat Detail &gt;</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.content}>
-        <Image
-          source={require("../assets/images/body.png")}
-          style={styles.bodyImage}
-          resizeMode="contain"
-        />
-
-        <View style={styles.indicatorContainer}>
-          <IndicatorCircle percentage={33} color="#25B2A6" label="Good" />
-          <IndicatorCircle
-            percentage={33}
-            color="#E25151"
-            label="Need Improvement"
-          />
-          <IndicatorCircle percentage={33} color="#747A7B" label="No Data" />
-        </View>
-      </View>
-    </View>
-  )
-}
-
 const IndicatorCircle = ({
   percentage,
   color,
@@ -66,6 +31,41 @@ const IndicatorCircle = ({
         )}
       </AnimatedCircularProgress>
       <Text style={styles.label}>{label}</Text>
+    </View>
+  )
+}
+
+const BodySystem = () => {
+  const navigation = useNavigation<any>()
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.title}>12 Body Systems Terbaru</Text>
+          <Text style={styles.subTitle}>16 September 2023</Text>
+        </View>
+        <TouchableOpacity onPress={() => navigation.navigate("body-system")}>
+          <Text style={styles.link}>Lihat Detail &gt;</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.content}>
+        <Image
+          source={require("../assets/images/body.png")}
+          style={styles.bodyImage}
+          resizeMode="center"
+        />
+
+        <View style={styles.indicatorContainer}>
+          <IndicatorCircle percentage={33} color="#25B2A6" label="Good" />
+          <IndicatorCircle
+            percentage={33}
+            color="#E25151"
+            label="Need Improvement"
+          />
+          <IndicatorCircle percentage={33} color="#747A7B" label="No Data" />
+        </View>
+      </View>
     </View>
   )
 }
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
   },
   bodyImage: {
     width: 200,
+    minHeight: 400,
     height: "100%",
     marginRight: 16,
   },
